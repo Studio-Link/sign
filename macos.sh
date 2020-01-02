@@ -54,4 +54,8 @@ curl -o studio-link-standalone-osx.zip https://download.studio.link/releases/v19
 #notarizefile "studio-link-standalone-osx.zip"
 #xcrun stapler staple "studio-link-standalone-osx.zip"
 
-echo $APPLE_ID
+xcrun altool --notarize-app \
+	--primary-bundle-id "link.studio.standalone.zip" \
+	--username "$APPLE_ID" \
+	--password "$APPLE_APP_PASSWORD" \
+	--file studio-link-standalone-osx.zip
