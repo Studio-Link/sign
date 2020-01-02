@@ -18,6 +18,7 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
                                --primary-bundle-id "link.studio.standalone.zip" \
                                --username "$APPLE_ID" \
                                --password "$APPLE_APP_PASSWORD" \
+			       --asc-provider "CX34XZ2JTT" \
                                --file "$filepath" 2>&1 \
                   | awk '/RequestUUID/ { print $NF; }')
                                
@@ -51,6 +52,5 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
 }
 
 curl -o studio-link-standalone-osx.zip https://download.studio.link/releases/v19.09.0-beta/studio-link-standalone-osx.zip
-#notarizefile "studio-link-standalone-osx.zip"
-#xcrun stapler staple "studio-link-standalone-osx.zip"
-xcrun altool --list-providers -u "$APPLE_ID" -p "$APPLE_APP_PASSWORD"
+notarizefile "studio-link-standalone-osx.zip"
+xcrun stapler staple "studio-link-standalone-osx.zip"
