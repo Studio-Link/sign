@@ -55,3 +55,4 @@ curl -o studio-link-standalone-osx.zip https://download.studio.link/releases/v19
 #notarizefile "studio-link-standalone-osx.zip"
 unzip studio-link-standalone-osx.zip
 xcrun stapler staple "StudioLinkStandalone.app"
+zip -r studio-link-standalone-osx-signed StudioLinkStandalone.app
