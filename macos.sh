@@ -50,6 +50,6 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
     
 }
 
-wget https://download.studio.link/releases/v19.09.0-beta/studio-link-standalone-osx.zip
+curl -o studio-link-standalone-osx.zip https://download.studio.link/releases/v19.09.0-beta/studio-link-standalone-osx.zip
 notarizefile "studio-link-standalone-osx.zip"
 xcrun stapler staple "studio-link-standalone-osx.zip"
