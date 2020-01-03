@@ -1,1 +1,2 @@
+wget
 "%SignTool%" \h
