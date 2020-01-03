@@ -51,8 +51,8 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
     
 }
 
-curl -o studio-link-standalone-osx.zip https://download.studio.link/releases/v19.09.0-beta/studio-link-standalone-osx.zip
-#notarizefile "studio-link-standalone-osx.zip"
+curl -o studio-link-standalone-osx.zip https://download.studio.link/nightly/v19.xx.x/v19.12.0-alpha-772.ad09743/osx/studio-link-standalone-hardened-v19.12.0.zip
+notarizefile "studio-link-standalone-osx.zip"
 unzip studio-link-standalone-osx.zip
-xcrun stapler staple "StudioLinkStandalone.app"
+xcrun stapler staple "StudioLinkStandaloneHardened.app"
 zip -r studio-link-standalone-osx-signed StudioLinkStandalone.app
