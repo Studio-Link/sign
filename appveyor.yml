@@ -17,6 +17,8 @@ environment:
     secure: i+klm7FJaH4tuAOzjf6IrvwaxXCK0y3ZcvZYCNKEJ0wIMueAUTyez9Fe36HhR4SU8O4EYAZrTiZoErHvi9LNUA==
   pfx_enc_secret:
     secure: wbIgf3icm2DkX9jT6jGqwIyoFHdaS049bT8zSPqU4E8=
+  pfx_password:
+    secure: ml6i6vM0200Kn+A08riwuHMsmD5KndK4Q1i1nLLEcC8=
 
 build_script:
   - sh: ./macos.sh
