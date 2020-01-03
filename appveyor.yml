@@ -5,7 +5,7 @@ image:
 
 install:
   - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
-  - cmd: appveyor-tools\secure-file -decrypt certificate.p12.enc -secret %p12_enc_secret% -salt %p12_enc_salt%
+  - cmd: appveyor-tools\secure-file -decrypt certificate.pfx.enc -secret %pfx_enc_secret% -salt %pfx_enc_salt%
 
 environment:
   APPLE_ID:
@@ -13,6 +13,10 @@ environment:
   APPLE_APP_PASSWORD:
     secure: r1e9JZQz8qVP4bOGcCnTwmzA4HZajrblXVz6C1b5/Og=
   SignTool: C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe
+  pfx_enc_salt:
+    secure: i+klm7FJaH4tuAOzjf6IrvwaxXCK0y3ZcvZYCNKEJ0wIMueAUTyez9Fe36HhR4SU8O4EYAZrTiZoErHvi9LNUA==
+  pfx_enc_secret:
+    secure: wbIgf3icm2DkX9jT6jGqwIyoFHdaS049bT8zSPqU4E8=
 
 build_script:
   - sh: ./macos.sh
