@@ -1,12 +1,14 @@
 version: 1.0.{build}
 image:
-- macOS
 - Visual Studio 2019
+- macOS
 environment:
   APPLE_ID:
     secure: r0BqWXkS4SSgBWsmWoJeRx/cygzj0tkIC2M9CSQav6U=
   APPLE_APP_PASSWORD:
     secure: r1e9JZQz8qVP4bOGcCnTwmzA4HZajrblXVz6C1b5/Og=
+  SignTool: C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe
+
 build_script:
 - sh: ./macos.sh
 - cmd: win.cmd
