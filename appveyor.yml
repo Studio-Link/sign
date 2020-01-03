@@ -1,7 +1,12 @@
 version: 1.0.{build}
 image:
-- Visual Studio 2019
-- macOS
+  - Visual Studio 2019
+  - macOS
+
+install:
+  - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
+  - cmd: appveyor-tools\secure-file -decrypt certificate.p12.enc -secret %p12_enc_secret% -salt %p12_enc_salt%
+
 environment:
   APPLE_ID:
     secure: r0BqWXkS4SSgBWsmWoJeRx/cygzj0tkIC2M9CSQav6U=
@@ -10,5 +15,5 @@ environment:
   SignTool: C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe
 
 build_script:
-- sh: ./macos.sh
-- cmd: win.cmd
+  - sh: ./macos.sh
+  - cmd: win.cmd
