@@ -56,3 +56,5 @@ curl -o studio-link-standalone-osx.zip https://download.studio.link/nightly/v19.
 unzip studio-link-standalone-osx.zip
 xcrun stapler staple "StudioLinkStandaloneHardened.app"
 zip -r studio-link-standalone-osx-signed StudioLinkStandaloneHardened.app
+
+appveyor PushArtifact studio-link-standalone-osx-signed.zip
