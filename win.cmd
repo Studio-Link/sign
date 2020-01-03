@@ -1,1 +1,1 @@
-%SignTool% \h
+"%SignTool%" \h
