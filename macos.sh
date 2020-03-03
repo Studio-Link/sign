@@ -67,9 +67,6 @@ xcrun stapler staple "StudioLink.component"
 zip -r studio-link-plugin StudioLink.component
 appveyor PushArtifact studio-link-plugin.zip
 
-#onair disabled
-exit 0
-
 curl -o studio-link-plugin-onair.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/osx/hardened/studio-link-plugin-onair.zip
 notarizefile "studio-link-plugin-onair.zip"
 unzip studio-link-plugin-onair.zip
