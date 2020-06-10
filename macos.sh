@@ -55,7 +55,7 @@ curl -o studio-link-standalone.zip https://download.studio.link/releases/$APPVEY
 notarizefile "studio-link-standalone.zip"
 unzip studio-link-standalone.zip
 rm studio-link-standalone.zip
-codesign -dvv studio-link-standalone.app
+codesign -dvv StudioLinkStandalone.app
 xcrun stapler staple "StudioLinkStandalone.app"
 zip -r studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip StudioLinkStandalone.app
 appveyor PushArtifact studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip
