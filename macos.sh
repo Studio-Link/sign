@@ -52,6 +52,7 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
 }
 
 curl -o studio-link-standalone.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/osx/hardened/studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip
+codesign -dvv studio-link-standalone.zip
 notarizefile "studio-link-standalone.zip"
 unzip studio-link-standalone.zip
 rm studio-link-standalone.zip
