@@ -51,27 +51,32 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
     
 }
 
-curl -o studio-link-standalone.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/osx/hardened/studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip
-notarizefile "studio-link-standalone.zip"
-unzip studio-link-standalone.zip
-rm studio-link-standalone.zip
-codesign -dvv StudioLinkStandalone.app
-xcrun stapler staple "StudioLinkStandalone.app"
-zip -r studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip StudioLinkStandalone.app
-appveyor PushArtifact studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip
+for p in macos_arm64 macos_x86_64; do
+	mkdir -p $p
+	cd $p
+	curl -o studio-link-standalone.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/$p/hardened/studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip
+	notarizefile "studio-link-standalone.zip"
+	unzip studio-link-standalone.zip
+	rm studio-link-standalone.zip
+	codesign -dvv StudioLinkStandalone.app
+	xcrun stapler staple "StudioLinkStandalone.app"
+	zip -r studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip StudioLinkStandalone.app
+	appveyor PushArtifact studio-link-standalone-$APPVEYOR_REPO_TAG_NAME-$p.zip
 
-curl -o studio-link-plugin.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/osx/hardened/studio-link-plugin.zip
-notarizefile "studio-link-plugin.zip"
-unzip studio-link-plugin.zip
-rm studio-link-plugin.zip
-xcrun stapler staple "StudioLink.component"
-zip -r studio-link-plugin StudioLink.component
-appveyor PushArtifact studio-link-plugin.zip
+	curl -o studio-link-plugin.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/$p/hardened/studio-link-plugin.zip
+	notarizefile "studio-link-plugin.zip"
+	unzip studio-link-plugin.zip
+	rm studio-link-plugin.zip
+	xcrun stapler staple "StudioLink.component"
+	zip -r studio-link-plugin StudioLink.component
+	appveyor PushArtifact studio-link-plugin-$p.zip
 
-curl -o studio-link-plugin-onair.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/osx/hardened/studio-link-plugin-onair.zip
-notarizefile "studio-link-plugin-onair.zip"
-unzip studio-link-plugin-onair.zip
-rm -f studio-link-plugin-onair.zip
-xcrun stapler staple "StudioLinkOnAir.component"
-zip -r studio-link-plugin-onair StudioLinkOnAir.component
-appveyor PushArtifact studio-link-plugin-onair.zip
+	curl -o studio-link-plugin-onair.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/$p/hardened/studio-link-plugin-onair.zip
+	notarizefile "studio-link-plugin-onair.zip"
+	unzip studio-link-plugin-onair.zip
+	rm -f studio-link-plugin-onair.zip
+	xcrun stapler staple "StudioLinkOnAir.component"
+	zip -r studio-link-plugin-onair StudioLinkOnAir.component
+	appveyor PushArtifact studio-link-plugin-onair-$p.zip
+	cd ..
+done
