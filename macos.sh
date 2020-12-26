@@ -60,7 +60,7 @@ for p in macos_arm64 macos_x86_64; do
 	rm studio-link-standalone.zip
 	codesign -dvv StudioLinkStandalone.app
 	xcrun stapler staple "StudioLinkStandalone.app"
-	zip -r studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip StudioLinkStandalone.app
+	zip -r studio-link-standalone-$APPVEYOR_REPO_TAG_NAME-$p.zip StudioLinkStandalone.app
 	appveyor PushArtifact studio-link-standalone-$APPVEYOR_REPO_TAG_NAME-$p.zip
 
 	curl -o studio-link-plugin.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/$p/hardened/studio-link-plugin.zip
@@ -68,7 +68,7 @@ for p in macos_arm64 macos_x86_64; do
 	unzip studio-link-plugin.zip
 	rm studio-link-plugin.zip
 	xcrun stapler staple "StudioLink.component"
-	zip -r studio-link-plugin StudioLink.component
+	zip -r studio-link-plugin-$p StudioLink.component
 	appveyor PushArtifact studio-link-plugin-$p.zip
 
 	curl -o studio-link-plugin-onair.zip https://download.studio.link/releases/$APPVEYOR_REPO_TAG_NAME/$p/hardened/studio-link-plugin-onair.zip
@@ -76,7 +76,7 @@ for p in macos_arm64 macos_x86_64; do
 	unzip studio-link-plugin-onair.zip
 	rm -f studio-link-plugin-onair.zip
 	xcrun stapler staple "StudioLinkOnAir.component"
-	zip -r studio-link-plugin-onair StudioLinkOnAir.component
+	zip -r studio-link-plugin-onair-$p StudioLinkOnAir.component
 	appveyor PushArtifact studio-link-plugin-onair-$p.zip
 	cd ..
 done
