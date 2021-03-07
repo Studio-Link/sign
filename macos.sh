@@ -6,7 +6,12 @@ lipo_glue() {
 		../macos_arm64/$content_path -create -output ${1}
 	cp -a ${1} $content_path
 	lipo -info $content_path
-	codesign -f --verbose -s "Developer ID Application: Sebastian Reimers (CX34XZ2JTT)" ${1}.${2}
+	if [ "${2}" -eq ".app" ]; then
+		codesign --options runtime --entitlements entitlements.plist -f --verbose \
+			-s "Developer ID Application: Sebastian Reimers (CX34XZ2JTT)" ${1}.${2}
+	else
+		codesign -f --verbose -s "Developer ID Application: Sebastian Reimers (CX34XZ2JTT)" ${1}.${2}
+	fi
 	zip -r ${3}.zip ${1}.${2}
 	rm -Rf ${1}.${2}
 } 
