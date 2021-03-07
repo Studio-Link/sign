@@ -7,7 +7,7 @@ lipo_glue() {
 	cp -a ${1} $content_path
 	lipo -info $content_path
 	if [[ "${2}" == "app" ]]; then
-		codesign --options runtime --entitlements entitlements.plist -f --verbose \
+		codesign --options runtime --entitlements ../entitlements.plist -f --verbose \
 			-s "Developer ID Application: Sebastian Reimers (CX34XZ2JTT)" ${1}.${2}
 	else
 		codesign -f --verbose -s "Developer ID Application: Sebastian Reimers (CX34XZ2JTT)" ${1}.${2}
