@@ -6,7 +6,7 @@ lipo_glue() {
 		../macos_arm64/$content_path -create -output ${1}
 	cp -a ${1} $content_path
 	lipo -info $content_path
-	if [ "${2}" -eq "app" ]; then
+	if [[ "${2}" == "app" ]]; then
 		codesign --options runtime --entitlements entitlements.plist -f --verbose \
 			-s "Developer ID Application: Sebastian Reimers (CX34XZ2JTT)" ${1}.${2}
 	else
