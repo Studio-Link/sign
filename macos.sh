@@ -92,6 +92,7 @@ for p in macos_arm64 macos_x86_64; do
 done
 
 cd macos_x86_64
+
 lipo_glue StudioLinkStandalone app studio-link-standalone
 notarizefile "studio-link-standalone.zip"
 unzip studio-link-standalone.zip
@@ -100,9 +101,8 @@ codesign -dvv StudioLinkStandalone.app
 xcrun stapler staple "StudioLinkStandalone.app"
 zip -r studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip StudioLinkStandalone.app
 appveyor PushArtifact studio-link-standalone-$APPVEYOR_REPO_TAG_NAME.zip
-cd ..
 
-exit 0
+lipo_glue StudioLink component studio-link-plugin
 notarizefile "studio-link-plugin.zip"
 unzip studio-link-plugin.zip
 rm studio-link-plugin.zip
@@ -110,6 +110,7 @@ xcrun stapler staple "StudioLink.component"
 zip -r studio-link-plugin StudioLink.component
 appveyor PushArtifact studio-link-plugin.zip
 
+lipo_glue StudioLinkOnAir component studio-link-plugin-onair
 notarizefile "studio-link-plugin-onair.zip"
 unzip studio-link-plugin-onair.zip
 rm studio-link-plugin-onair.zip
