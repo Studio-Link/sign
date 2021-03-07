@@ -6,6 +6,7 @@ lipo_glue() {
 		../macos_arm64/$content_path -create -output ${1}
 	cp -a ${1} $content_path
 	lipo -info $content_path
+	codesign -f --verbose -s "Developer ID Application: Sebastian Reimers (CX34XZ2JTT)" ${1}.${2}
 	zip -r ${3}.zip ${1}.${2}
 	rm -Rf ${1}.${2}
 } 
@@ -60,6 +61,13 @@ notarizefile() { # $1: path to file to notarize, $2: identifier
     fi
     
 }
+
+security create-keychain -p travis sl-build.keychain
+security list-keychains -s ~/Library/Keychains/sl-build.keychain
+security unlock-keychain -p travis ~/Library/Keychains/sl-build.keychain
+security set-keychain-settings ~/Library/Keychains/sl-build.keychain
+security import cert_2020.p12 -k ~/Library/Keychains/sl-build.keychain -P $KEY_PASSWORD_2020 -A
+security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k travis sl-build.keychain
 
 for p in macos_arm64 macos_x86_64; do
 	mkdir -p $p

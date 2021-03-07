@@ -20,6 +20,8 @@ environment:
     secure: wbIgf3icm2DkX9jT6jGqwIyoFHdaS049bT8zSPqU4E8=
   pfx_password:
     secure: ml6i6vM0200Kn+A08riwuHMsmD5KndK4Q1i1nLLEcC8=
+  KEY_PASSWORD_2020:
+    secure: XLP314G/F9rMFbZx5e8PAsQ9Wc67cFAG6t6L26YSSP0=
 
 build_script:
   - sh: ./macos.sh
