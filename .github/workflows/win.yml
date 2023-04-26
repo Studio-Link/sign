@@ -1,0 +1,17 @@
+name: windows signing                           
+                                                                                                                                                            
+on:                                    
+  push:                       
+    branches: [ main ]               
+  pull_request:         
+    branches: [ main ]                                                                                                                                      
+                                       
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Decrypt GPG file
+        run: |
+          gpg 

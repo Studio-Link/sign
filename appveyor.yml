@@ -25,4 +25,4 @@ environment:
 
 build_script:
   - sh: ./macos.sh
-  - cmd: win.cmd
+#  - cmd: win.cmd
